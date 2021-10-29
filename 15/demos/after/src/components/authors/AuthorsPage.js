@@ -24,10 +24,19 @@ class AuthorsPage extends React.Component {
     }
   }
 
+  handleDeleteAuthor = async (author) => {
+    toast.success("Author deleted");
+    try {
+      await this.props.actions.deleteAuthor(author);
+    } catch (error) {
+      toast.error("Delete failed. " + error.message, { autoClose: false });
+    }
+  };
+
   render() {
     return (
       <>
-        {this.state.redirectToAddCoursePage && <Redirect to="/author" />}
+        {this.state.redirectToAddAuthorPage && <Redirect to="/author" />}
         <h2>Authors</h2>
         {this.props.loading ? (
           <Spinner />
@@ -41,7 +50,10 @@ class AuthorsPage extends React.Component {
               Add Author
             </button>
 
-            <AuthorsList authors={this.props.authors} />
+            <AuthorsList
+              onDeleteClick={this.handleDeleteAuthor}
+              authors={this.props.authors}
+            />
           </>
         )}
       </>
@@ -66,6 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
+      deleteAuthor: bindActionCreators(authorActions.deleteAuthor, dispatch),
     },
   };
 }
