@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 import { render } from "enzyme";
+import { courses } from "../../../tools/mockData";
 
 class AuthorsPage extends React.Component {
   state = {
@@ -24,12 +25,25 @@ class AuthorsPage extends React.Component {
     }
   }
 
+  courseWithAuthorExists() {
+    const { id, name } = author;
+    return state.courses.length === 0
+      ? false
+      : state.courses.find((a) => a.id === author.id);
+  }
+
   handleDeleteAuthor = async (author) => {
-    toast.success("Author deleted");
-    try {
-      await this.props.actions.deleteAuthor(author);
-    } catch (error) {
-      toast.error("Delete failed. " + error.message, { autoClose: false });
+    if (!courseWithAuthorExists()) {
+      toast.success("Author deleted");
+      try {
+        await this.props.actions.deleteAuthor(author);
+      } catch (error) {
+        toast.error("Delete failed. " + error.message, { autoClose: false });
+      }
+    } else {
+      toast.error(
+        "Author can't be deleted because course with author exists, delete courses first. "
+      );
     }
   };
 
