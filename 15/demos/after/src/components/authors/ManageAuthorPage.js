@@ -83,7 +83,8 @@ ManageAuthorPage.propTypes = {
 };
 
 export function getAuthorBySlug(authors, slug) {
-  return authors.find((author) => author.slug === slug) || null;
+  const foundAuthor = authors.find((author) => author.name === slug) || null;
+  return foundAuthor;
 }
 
 function mapStateToProps(state, ownProps) {

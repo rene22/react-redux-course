@@ -16,7 +16,9 @@ const AuthorsList = ({ authors, onDeleteClick }) => (
         return (
           <tr key={author.id}>
             <td>{author.id}</td>
-            <td>{author.name}</td>
+            <td>
+              <Link to={"/author/" + author.name}>{author.name}</Link>
+            </td>
             <td>
               <button
                 className="btn btn-outline-danger"

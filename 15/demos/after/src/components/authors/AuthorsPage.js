@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as authorActions from "../../redux/actions/authorActions";
+import * as courseActions from "../../redux/actions/courseActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import AuthorsList from "./AuthorsList";
@@ -8,32 +9,40 @@ import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 import { render } from "enzyme";
-import { courses } from "../../../tools/mockData";
+//import { courses } from "../../../tools/mockData";
 
+function canDoDelete(courses, author) {
+  if (courses.length > 0) {
+    if (courses.find((a) => a.authorId === author.id)) {
+      return false;
+    }
+  }
+  return true;
+}
 class AuthorsPage extends React.Component {
   state = {
     redirectToAddAuthorPage: false,
   };
 
   componentDidMount() {
-    const { authors, actions } = this.props;
+    const { courses, authors, actions } = this.props;
 
     if (authors.length === 0) {
       actions.loadAuthors().catch((error) => {
         alert("Loading authors failed. " + error);
       });
     }
-  }
 
-  courseWithAuthorExists() {
-    const { id, name } = author;
-    return state.courses.length === 0
-      ? false
-      : state.courses.find((a) => a.id === author.id);
+    if (courses.length === 0) {
+      actions.loadCourses().catch((error) => {
+        alert("Loading courses failed" + error);
+      });
+    }
   }
 
   handleDeleteAuthor = async (author) => {
-    if (!courseWithAuthorExists()) {
+    const { courses } = this.props;
+    if (canDoDelete(courses, author)) {
       toast.success("Author deleted");
       try {
         await this.props.actions.deleteAuthor(author);
@@ -42,7 +51,7 @@ class AuthorsPage extends React.Component {
       }
     } else {
       toast.error(
-        "Author can't be deleted because course with author exists, delete courses first. "
+        "Author can't be deleted because course with author exists, delete courses first."
       );
     }
   };
@@ -77,6 +86,7 @@ class AuthorsPage extends React.Component {
 
 AuthorsPage.propTypes = {
   authors: PropTypes.array.isRequired,
+  courses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
 };
@@ -84,6 +94,7 @@ AuthorsPage.propTypes = {
 function mapStateToProps(state) {
   return {
     authors: state.authors,
+    courses: state.courses,
     loading: state.apiCallsInProgress > 0,
   };
 }
@@ -92,6 +103,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
+      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
       deleteAuthor: bindActionCreators(authorActions.deleteAuthor, dispatch),
     },
   };
