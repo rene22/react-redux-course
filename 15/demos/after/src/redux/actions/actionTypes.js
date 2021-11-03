@@ -20,3 +20,5 @@ export const API_CALL_ERROR = "API_CALL_ERROR";
 // because we're not incrementing the number of apiCallInProgress when the delete request begins.
 export const DELETE_COURSE_OPTIMISTIC = "DELETE_COURSE_OPTIMISTIC";
 export const DELETE_AUTHOR_OPTIMISTIC = "DELETE_AUTHOR_OPTIMISTIC";
+
+export const FILTER_CHANGED = "FILTER_CHANGED";
