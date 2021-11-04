@@ -14,7 +14,6 @@ export function courseFilterCategoryChangedSuccess(filterCategoryStr) {
 
 export function courseFilterChanged(filterType, filterStr) {
   return function (dispatch) {
-    debugger;
     switch (filterType) {
       case "filterTitle":
         return dispatch(courseFilterTitleChangedSuccess(filterStr));

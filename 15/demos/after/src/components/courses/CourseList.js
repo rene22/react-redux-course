@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function doFilter(course, filterMap) {
   let filterDecision = doFilterTitle(course, filterMap);
 
+  debugger;
   if (filterDecision && !doFilterAuthor(course, filterMap)) {
     filterDecision = false;
   }
@@ -36,7 +37,7 @@ function doFilterAuthor(course, filterMap) {
   if (filterAuthor === "") {
     return true;
   } else {
-    if (course.title.startsWith(filterAuthor)) {
+    if (course.authorName.startsWith(filterAuthor)) {
       return true;
     }
   }
@@ -49,7 +50,7 @@ function doFilterCategory(course, filterMap) {
   if (filterCategory === "") {
     return true;
   } else {
-    if (course.title.startsWith(filterCategory)) {
+    if (course.category.startsWith(filterCategory)) {
       return true;
     }
   }

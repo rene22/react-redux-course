@@ -73,9 +73,10 @@ export function ManageCoursePage({
       });
   }
 
-  return authors.length === 0 || courses.length === 0 ? (
-    <Spinner />
-  ) : (
+  //return authors.length === 0 || courses.length === 0 ? (
+  //<Spinner />
+  //) : (
+  return (
     <CourseForm
       course={course}
       errors={errors}
@@ -85,6 +86,7 @@ export function ManageCoursePage({
       saving={saving}
     />
   );
+  //);
 }
 
 ManageCoursePage.propTypes = {

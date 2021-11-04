@@ -44,7 +44,6 @@ class CoursesPage extends React.Component {
 
   handleFilterChanged = (filterType, filterStr) => {
     try {
-      debugger;
       this.props.actions.courseFilterChanged(filterType, filterStr);
     } catch (error) {
       toast.error(filterType + " filtering failed. " + error.message, {
@@ -75,15 +74,18 @@ class CoursesPage extends React.Component {
             >
               Add Course
             </button>
-
-            <form>
-              <CourseList
-                onDeleteClick={this.handleDeleteCourse}
-                courses={this.props.courses}
-                filterMap={this.props.filterMap}
-                filterChanged={this.handleFilterChanged}
-              />
-            </form>
+            {this.props.courses.length > 0 ? (
+              <form>
+                <CourseList
+                  onDeleteClick={this.handleDeleteCourse}
+                  courses={this.props.courses}
+                  filterMap={this.props.filterMap}
+                  filterChanged={this.handleFilterChanged}
+                />
+              </form>
+            ) : (
+              <></>
+            )}
           </>
         )}
       </>
