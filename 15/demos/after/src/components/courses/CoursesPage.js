@@ -44,6 +44,7 @@ class CoursesPage extends React.Component {
 
   handleFilterChanged = (filterType, filterStr) => {
     try {
+      debugger;
       this.props.actions.courseFilterChanged(filterType, filterStr);
     } catch (error) {
       toast.error(filterType + " filtering failed. " + error.message, {
@@ -95,7 +96,7 @@ CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  filterMap: PropTypes.array.isRequired,
+  filterMap: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -18,12 +18,12 @@ function doFilter(course, filterMap) {
 }
 
 function doFilterTitle(course, filterMap) {
-  const filterTitleStr = filterMap.get("filterTitleStr");
+  const filterTitle = filterMap.filterTitleStr;
 
-  if (filterTitleStr === "") {
+  if (filterTitle === "") {
     return true;
   } else {
-    if (course.title.startsWith(filterTitleStr)) {
+    if (course.title.startsWith(filterTitle)) {
       return true;
     }
   }
@@ -31,12 +31,12 @@ function doFilterTitle(course, filterMap) {
 }
 
 function doFilterAuthor(course, filterMap) {
-  const filterAuthorStr = filterMap.get("filterAuthorStr");
+  const filterAuthor = filterMap.filterAuthorStr;
 
-  if (filterAuthorStr === "") {
+  if (filterAuthor === "") {
     return true;
   } else {
-    if (course.title.startsWith(filterAuthorStr)) {
+    if (course.title.startsWith(filterAuthor)) {
       return true;
     }
   }
@@ -44,12 +44,12 @@ function doFilterAuthor(course, filterMap) {
 }
 
 function doFilterCategory(course, filterMap) {
-  const filterCategoryStr = filterMap.get("filterCategoryStr");
+  const filterCategory = filterMap.filterCategoryStr;
 
-  if (filterCategoryStr === "") {
+  if (filterCategory === "") {
     return true;
   } else {
-    if (course.title.startsWith(filterCategoryStr)) {
+    if (course.title.startsWith(filterCategory)) {
       return true;
     }
   }
@@ -130,7 +130,7 @@ const CourseList = ({ courses, onDeleteClick, filterMap, filterChanged }) => (
 CourseList.propTypes = {
   courses: PropTypes.array.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  filterMap: PropTypes.array.isRequired,
+  filterMap: PropTypes.object.isRequired,
   filterChanged: PropTypes.func.isRequired,
 };
 

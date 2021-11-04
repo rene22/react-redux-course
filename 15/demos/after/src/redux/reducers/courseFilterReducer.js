@@ -7,22 +7,12 @@ export default function courseFilterReducer(
 ) {
   debugger;
   if (action.type == types.FILTER_TITLE_CHANGED) {
-    return state.map((object1) =>
-      object1.get("filterTitle") === action.filterStr
-        ? action.filterStr
-        : object1
-    );
+    return state.map((object1) => (object1.filterTitleStr = action.filterStr));
   } else if (action.type == types.FILTER_AUTHOR_CHANGED) {
-    return state.map((object1) =>
-      object1.get("filterAuthor") === action.filterStr
-        ? action.filterStr
-        : object1
-    );
+    return state.map((object1) => (object1.filterAuthorStr = action.filterStr));
   } else if (action.type == types.FILTER_CATEGORY_CHANGED) {
-    return state.map((object1) =>
-      object1.get("filterCategory") === action.filterStr
-        ? object1.get("filterCategory")
-        : object1
+    return state.map(
+      (object1) => (object1.filterCategoryStr = action.filterStr)
     );
   }
 
