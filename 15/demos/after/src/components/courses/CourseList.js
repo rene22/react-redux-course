@@ -67,7 +67,7 @@ const CourseList = ({ courses, onDeleteClick, filterMap, filterChanged }) => (
             <TextInput
               name="filterTitle"
               label=""
-              value={Object.entries(filterMap).key === "filterTitleStr"}
+              value={filterMap.filterTitleStr}
               onChange={(e) => filterChanged("filterTitle", e.target.value)}
             />
           </th>
@@ -76,7 +76,7 @@ const CourseList = ({ courses, onDeleteClick, filterMap, filterChanged }) => (
             <TextInput
               name="filterAuthor"
               label=""
-              value={Object.entries(filterMap).key === "filterAuthorStr"}
+              value={filterMap.filterAuthorStr}
               onChange={(e) => filterChanged("filterAuthor", e.target.value)}
             />
           </th>
@@ -85,7 +85,7 @@ const CourseList = ({ courses, onDeleteClick, filterMap, filterChanged }) => (
             <TextInput
               name="filterCategory"
               label=""
-              value={Object.entries(filterMap).key === "filterCategoryStr"}
+              value={filterMap.filterCategoryStr}
               onChange={(e) => filterChanged("filterCategory", e.target.value)}
             />
           </th>

@@ -3,9 +3,9 @@ export default {
   authors: [],
   apiCallsInProgress: 0,
   filterStr: "",
-  filterMap: new Object([
-    ["filterTitleStr", ""],
-    ["filterAuthorStr", ""],
-    ["filterCategoryStr", ""],
-  ]),
+  filterMap: {
+    filterTitleStr: "",
+    filterAuthorStr: "",
+    filterCategoryStr: "",
+  },
 };
