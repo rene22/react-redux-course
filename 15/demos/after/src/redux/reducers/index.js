@@ -2,12 +2,14 @@ import { combineReducers } from "redux";
 import courses from "./courseReducer";
 import authors from "./authorReducer";
 import apiCallsInProgress from "./apiStatusReducer";
-import filterStr from "./courseFilterReducer";
+import filterMap from "./courseFilterReducer";
+import filterStr from "./authorFilterReducer";
 
 const rootReducer = combineReducers({
   courses,
   authors,
   apiCallsInProgress,
+  filterMap,
   filterStr,
 });
 

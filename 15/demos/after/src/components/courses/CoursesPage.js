@@ -42,12 +42,13 @@ class CoursesPage extends React.Component {
     }
   };
 
-  handleFilterChanged = async (filterStr) => {
-    toast.info("Filter list: " + filterStr);
+  handleFilterChanged = (filterType, filterStr) => {
     try {
-      this.props.actions.courseFilterChanged(filterStr);
+      this.props.actions.courseFilterChanged(filterType, filterStr);
     } catch (error) {
-      toast.error("Filtering failed. " + error.message, { autoClose: 3000 });
+      toast.error(filterType + " filtering failed. " + error.message, {
+        autoClose: 3000,
+      });
     }
 
     //const found = courses.filter((course) =>
@@ -78,7 +79,7 @@ class CoursesPage extends React.Component {
               <CourseList
                 onDeleteClick={this.handleDeleteCourse}
                 courses={this.props.courses}
-                filterStr={this.props.filterStr}
+                filterMap={this.props.filterMap}
                 filterChanged={this.handleFilterChanged}
               />
             </form>
@@ -94,7 +95,7 @@ CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  filterStr: PropTypes.string.isRequired,
+  filterMap: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -110,7 +111,7 @@ function mapStateToProps(state) {
             };
           }),
     authors: state.authors,
-    filterStr: state.filterStr,
+    filterMap: state.filterMap,
     loading: state.apiCallsInProgress > 0,
   };
 }

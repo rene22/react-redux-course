@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as authorActions from "../../redux/actions/authorActions";
 import * as courseActions from "../../redux/actions/courseActions";
+import * as authorFilterActions from "../../redux/actions/authorFilterActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import AuthorsList from "./AuthorsList";
@@ -56,6 +57,15 @@ class AuthorsPage extends React.Component {
     }
   };
 
+  handleFilterChanged = (filterStr) => {
+    // toast.info("Filter list: " + filterStr);
+    try {
+      this.props.actions.authorFilterChanged(filterStr);
+    } catch (error) {
+      toast.error("Filtering failed. " + error.message, { autoClose: 3000 });
+    }
+  };
+
   render() {
     return (
       <>
@@ -76,6 +86,8 @@ class AuthorsPage extends React.Component {
             <AuthorsList
               onDeleteClick={this.handleDeleteAuthor}
               authors={this.props.authors}
+              filterStr={this.props.filterStr}
+              filterChanged={this.handleFilterChanged}
             />
           </>
         )}
@@ -88,6 +100,7 @@ AuthorsPage.propTypes = {
   authors: PropTypes.array.isRequired,
   courses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
+  filterStr: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
@@ -95,6 +108,7 @@ function mapStateToProps(state) {
   return {
     authors: state.authors,
     courses: state.courses,
+    filterStr: state.filterStr,
     loading: state.apiCallsInProgress > 0,
   };
 }
@@ -105,6 +119,10 @@ function mapDispatchToProps(dispatch) {
       loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
       loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
       deleteAuthor: bindActionCreators(authorActions.deleteAuthor, dispatch),
+      authorFilterChanged: bindActionCreators(
+        authorFilterActions.authorFilterChanged,
+        dispatch
+      ),
     },
   };
 }
