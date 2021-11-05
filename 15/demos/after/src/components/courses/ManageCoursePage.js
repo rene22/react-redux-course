@@ -7,6 +7,7 @@ import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
+import { debug } from "webpack";
 
 export function ManageCoursePage({
   courses,
@@ -18,8 +19,10 @@ export function ManageCoursePage({
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
+  const [courseSave, setCourseSave] = useState({ ...props.course });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -37,12 +40,23 @@ export function ManageCoursePage({
     }
   }, [props.course]);
 
+  function trackChanges(prevCourse) {
+    debugger;
+    setDirty(false);
+    if (courseSave.authorId != prevCourse.authorId) {
+      setDirty(true);
+    }
+    setDirty(false);
+  }
+
   function handleChange(event) {
     const { name, value } = event.target;
     setCourse((prevCourse) => ({
       ...prevCourse,
       [name]: name === "authorId" ? parseInt(value, 10) : value,
     }));
+
+    trackChanges(course);
   }
 
   function formIsValid() {

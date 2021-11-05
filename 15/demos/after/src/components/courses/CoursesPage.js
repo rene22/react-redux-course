@@ -42,7 +42,7 @@ class CoursesPage extends React.Component {
     }
   };
 
-  handleFilterChanged = (filterType, filterStr) => {
+  handleFilterChanged = async (filterType, filterStr) => {
     try {
       this.props.actions.courseFilterChanged(filterType, filterStr);
     } catch (error) {
