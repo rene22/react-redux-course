@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 function doFilter(course, filterMap) {
   let filterDecision = doFilterTitle(course, filterMap);
 
-  debugger;
   if (filterDecision && !doFilterAuthor(course, filterMap)) {
     filterDecision = false;
   }

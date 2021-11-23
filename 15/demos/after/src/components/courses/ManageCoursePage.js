@@ -7,7 +7,6 @@ import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
-import { debug } from "webpack";
 
 export function ManageCoursePage({
   courses,
